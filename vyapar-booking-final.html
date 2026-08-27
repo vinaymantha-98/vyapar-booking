@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Vyapar Setup Call</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f5f7fa;
+  min-height: 100vh;
+  padding: 24px 16px;
+  color: #1a1a1a;
+}
+
+.wrap {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.brand-bar {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px;
+}
+.brand-logo {
+  width: 38px; height: 38px;
+  background: #1a73e8;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 16px;
+}
+.brand-name { font-size: 16px; font-weight: 600; }
+.brand-sub { font-size: 12px; color: #666; }
+
+h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+.subhead { font-size: 14px; color: #555; margin-bottom: 24px; line-height: 1.5; }
+
+.step-label {
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  color: #888; margin-bottom: 8px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e8eaed;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+
+/* Calendar */
+.cal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.cal-title { font-size: 14px; font-weight: 600; }
+.cal-nav {
+  background: none; border: 1px solid #e8eaed;
+  border-radius: 8px; width: 30px; height: 30px;
+  cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: #555; transition: background 0.1s;
+}
+.cal-nav:hover { background: #f5f7fa; }
+
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.cal-dow {
+  font-size: 11px; color: #999; font-weight: 600;
+  text-align: center; padding: 4px 0;
+}
+.cal-day {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; border-radius: 8px; cursor: pointer;
+  transition: background 0.1s; color: #1a1a1a;
+  border: 1px solid transparent;
+}
+.cal-day:hover:not(.disabled):not(.empty):not(.past) { background: #f0f4ff; border-color: #c5d8fb; }
+.cal-day.today { color: #1a73e8; font-weight: 700; }
+.cal-day.selected { background: #1a73e8 !important; color: white !important; border-color: #1a73e8 !important; }
+.cal-day.past, .cal-day.disabled { color: #ccc; cursor: default; pointer-events: none; }
+.cal-day.empty { cursor: default; pointer-events: none; }
+
+/* Time slots */
+.slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+.slot {
+  padding: 10px 4px; border: 1px solid #e8eaed;
+  border-radius: 8px; font-size: 12px; font-weight: 500;
+  text-align: center; cursor: pointer; color: #555;
+  background: white; transition: all 0.12s; line-height: 1.2;
+}
+.slot:hover { border-color: #1a73e8; color: #1a73e8; background: #f0f4ff; }
+.slot.selected { background: #1a73e8; color: white; border-color: #1a73e8; }
+
+/* Form */
+.form-row { margin-bottom: 12px; }
+.form-label { font-size: 12px; color: #555; margin-bottom: 5px; display: block; font-weight: 500; }
+.form-input {
+  width: 100%; padding: 10px 13px;
+  border: 1px solid #e8eaed; border-radius: 8px;
+  font-size: 14px; background: white; color: #1a1a1a;
+  outline: none; font-family: inherit;
+}
+.form-input:focus { border-color: #1a73e8; box-shadow: 0 0 0 3px #e8f0fe; }
+.error-text { font-size: 12px; color: #c5221f; margin-top: 4px; display: none; }
+
+/* Summary */
+.summary-bar {
+  background: #e8f0fe; border: 1px solid #c5d8fb;
+  border-radius: 10px; padding: 11px 14px;
+  font-size: 13px; color: #1558c0;
+  display: none; align-items: center; gap: 8px;
+  margin-bottom: 14px;
+}
+
+/* Button */
+.confirm-btn {
+  width: 100%; padding: 13px;
+  background: #1a73e8; color: white;
+  border: none; border-radius: 10px;
+  font-size: 15px; font-weight: 600;
+  cursor: pointer; font-family: inherit;
+  transition: background 0.15s;
+}
+.confirm-btn:hover { background: #1558c0; }
+
+/* Success */
+.success-screen { text-align: center; padding: 3rem 1rem; display: none; }
+.success-icon {
+  width: 60px; height: 60px; background: #e6f4ea;
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; margin: 0 auto 16px;
+  font-size: 30px;
+}
+.success-heading { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.success-sub { font-size: 14px; color: #555; line-height: 1.7; }
+.slot-pill {
+  display: inline-block; background: #e8f0fe; color: #1558c0;
+  border-radius: 20px; padding: 7px 18px;
+  font-size: 13px; font-weight: 600; margin: 12px 0;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand-bar">
+    <div class="brand-logo">V</div>
+    <div>
+      <div class="brand-name">Vyapar</div>
+      <div class="brand-sub">Setup Call Booking</div>
+    </div>
+  </div>
+
+  <div id="main-flow">
+    <h1>Book your free setup call</h1>
+    <p class="subhead">Pick a date and time — our team will walk you through Vyapar in 30 minutes.</p>
+
+    <!-- Step 1: Date -->
+    <div class="step-label">Step 1 — Pick a date</div>
+    <div class="card">
+      <div class="cal-header">
+        <button class="cal-nav" id="prev-month">&#8249;</button>
+        <span class="cal-title" id="cal-title"></span>
+        <button class="cal-nav" id="next-month">&#8250;</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+
+    <!-- Step 2: Time -->
+    <div id="time-section" style="display:none;">
+      <div class="step-label">Step 2 — Pick a time</div>
+      <div class="card">
+        <div style="font-size:13px; color:#666; margin-bottom:10px;">
+          Slots for <strong id="selected-date-label"></strong>
+        </div>
+        <div class="slots-grid" id="slots-grid"></div>
+      </div>
+    </div>
+
+    <!-- Step 3: Phone -->
+    <div id="details-section" style="display:none;">
+      <div class="step-label">Step 3 — Your WhatsApp number</div>
+      <div class="card">
+        <div class="form-row" style="margin-bottom:0;">
+          <label class="form-label" for="inp-phone">WhatsApp number</label>
+          <input class="form-input" type="tel" id="inp-phone" placeholder="+91 98765 43210">
+          <div class="error-text" id="err-phone">Please enter a valid phone number</div>
+        </div>
+      </div>
+
+      <div class="summary-bar" id="summary-bar">
+        📅 <span id="summary-text"></span>
+      </div>
+
+      <button class="confirm-btn" id="confirm-btn">Confirm my slot →</button>
+      <div class="error-text" id="err-submit" style="text-align:center; margin-top:8px;"></div>
+    </div>
+  </div>
+
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">✅</div>
+    <div class="success-heading">You're all set!</div>
+    <div class="slot-pill" id="success-slot"></div>
+    <div class="success-sub">
+      Our team will call you on WhatsApp at the time above.<br>
+      Keep the Vyapar app open and ready!
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PASTE YOUR GOOGLE APPS SCRIPT URL HERE ──────────────────────────────────
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhFXE_f37fg9AJUE5kV4XTOOPJeHhptm6zjohgk8uAzWFwqF51kelAu9zfori3ieH-5w/exec";
+// ────────────────────────────────────────────────────────────────────────────
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+const TIME_SLOTS = [
+  '10:00 AM','10:30 AM','11:00 AM','11:30 AM',
+  '12:00 PM','12:30 PM','2:00 PM','2:30 PM',
+  '3:00 PM','3:30 PM','4:00 PM','4:30 PM'
+];
+
+const today = new Date(); today.setHours(0,0,0,0);
+let curYear = today.getFullYear(), curMonth = today.getMonth();
+let selDate = null, selTime = null;
+
+function renderCal() {
+  document.getElementById('cal-title').textContent = MONTHS[curMonth] + ' ' + curYear;
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+  DAYS.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'cal-dow'; el.textContent = d; grid.appendChild(el);
+  });
+  const startDay = new Date(curYear, curMonth, 1).getDay();
+  const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+  for (let i = 0; i < startDay; i++) {
+    const el = document.createElement('div'); el.className = 'cal-day empty'; grid.appendChild(el);
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = new Date(curYear, curMonth, d);
+    const dow = date.getDay();
+    const el = document.createElement('div'); el.textContent = d;
+    const isPast = date < today, isWeekend = dow === 0 || dow === 6;
+    const isToday = date.getTime() === today.getTime();
+    const isSel = selDate && date.getTime() === selDate.getTime();
+    if (isPast || isWeekend) { el.className = 'cal-day past'; }
+    else {
+      el.className = 'cal-day' + (isToday ? ' today' : '') + (isSel ? ' selected' : '');
+      el.addEventListener('click', () => selectDate(date));
+    }
+    grid.appendChild(el);
+  }
+}
+
+function selectDate(date) {
+  selDate = date; selTime = null; renderCal();
+  const label = date.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' });
+  document.getElementById('selected-date-label').textContent = label;
+  document.getElementById('time-section').style.display = 'block';
+  document.getElementById('details-section').style.display = 'none';
+  updateSummary();
+  const sg = document.getElementById('slots-grid'); sg.innerHTML = '';
+  TIME_SLOTS.forEach(t => {
+    const el = document.createElement('div'); el.className = 'slot'; el.textContent = t;
+    el.addEventListener('click', () => selectTime(t, el)); sg.appendChild(el);
+  });
+  document.getElementById('time-section').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function selectTime(time, el) {
+  selTime = time;
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('details-section').style.display = 'block';
+  updateSummary();
+  document.getElementById('details-section').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function updateSummary() {
+  const bar = document.getElementById('summary-bar');
+  if (selDate && selTime) {
+    const ds = selDate.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
+    document.getElementById('summary-text').textContent = ds + ' at ' + selTime + ' · 30-min setup call';
+    bar.style.display = 'flex';
+  } else { bar.style.display = 'none'; }
+}
+
+document.getElementById('prev-month').addEventListener('click', () => {
+  curMonth--; if (curMonth < 0) { curMonth = 11; curYear--; } renderCal();
+});
+document.getElementById('next-month').addEventListener('click', () => {
+  curMonth++; if (curMonth > 11) { curMonth = 0; curYear++; } renderCal();
+});
+
+document.getElementById('confirm-btn').addEventListener('click', async () => {
+  const phone = document.getElementById('inp-phone').value.trim();
+  document.getElementById('err-phone').style.display = 'none';
+  document.getElementById('err-submit').style.display = 'none';
+  let valid = true;
+  if (!phone || phone.replace(/\D/g,'').length < 7) {
+    document.getElementById('err-phone').style.display = 'block'; valid = false;
+  }
+  if (!selDate || !selTime) { valid = false; }
+  if (!valid) return;
+
+  const btn = document.getElementById('confirm-btn');
+  btn.textContent = 'Saving your slot…'; btn.disabled = true;
+
+  const payload = {
+    phone: phone,
+    date: selDate.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
+    time: selTime,
+    submittedAt: new Date().toLocaleString('en-IN')
+  };
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch(e) { /* no-cors always throws, ignore */ }
+
+  const dateStr = selDate.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  document.getElementById('success-slot').textContent = dateStr + '  ·  ' + selTime;
+  document.getElementById('main-flow').style.display = 'none';
+  document.getElementById('success-screen').style.display = 'block';
+});
+
+renderCal();
+</script>
+</body>
+</html>

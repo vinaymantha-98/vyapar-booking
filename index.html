@@ -272,7 +272,7 @@ function renderCal() {
   for (let d = 1; d <= daysInMonth; d++) {
     const date = new Date(curYear, curMonth, d);
     const el = document.createElement('div'); el.textContent = d;
-    const isPast = date < today, isWeekend = false;
+    const isPast = date <= today, isWeekend = false;
     const isToday = date.getTime() === today.getTime();
     const isSel = selDate && date.getTime() === selDate.getTime();
     if (isPast || isWeekend) { el.className = 'cal-day past'; }

@@ -331,7 +331,7 @@ document.getElementById('inp-phone').addEventListener('input', () => {
 document.getElementById('confirm-btn').addEventListener('click', async () => {
   const phone = document.getElementById('inp-phone').value.trim();
   document.getElementById('err-phone').style.display = 'none';
-  if (!phone || phone.replace(/\D/g,'').length < 7) {
+  if (!phone || phone.replace(/\D/g,'').length < 10) {
     document.getElementById('err-phone').style.display = 'block';
     return;
   }

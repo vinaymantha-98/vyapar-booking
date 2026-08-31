@@ -6,179 +6,71 @@
 <title>Book Your Vyapar Setup Call</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #f5f7fa;
-  min-height: 100vh;
-  padding: 24px 16px;
-  color: #1a1a1a;
-}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; min-height: 100vh; padding: 24px 16px; color: #1a1a1a; }
 .wrap { max-width: 480px; margin: 0 auto; }
-
 .brand-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
-.brand-logo {
-  width: 38px; height: 38px; background: #E8192C;
-  border-radius: 10px; display: flex; align-items: center;
-  justify-content: center; color: white; font-weight: 700; font-size: 16px;
-}
+.brand-logo { width: 38px; height: 38px; background: #E8192C; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px; }
 .brand-name { font-size: 16px; font-weight: 600; }
 .brand-sub { font-size: 12px; color: #666; }
-
 h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
 .subhead { font-size: 14px; color: #555; margin-bottom: 24px; line-height: 1.5; }
-
-.step-label {
-  font-size: 11px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.07em;
-  color: #888; margin-bottom: 8px;
-}
-
-.card {
-  background: white; border: 1px solid #e8eaed;
-  border-radius: 14px; padding: 16px 18px; margin-bottom: 14px;
-}
-
+.step-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #888; margin-bottom: 8px; }
+.card { background: white; border: 1px solid #e8eaed; border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
 .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .cal-title { font-size: 14px; font-weight: 600; }
-.cal-nav {
-  background: none; border: 1px solid #e8eaed; border-radius: 8px;
-  width: 30px; height: 30px; cursor: pointer; font-size: 16px;
-  display: flex; align-items: center; justify-content: center;
-  color: #555; transition: background 0.1s;
-}
+.cal-nav { background: none; border: 1px solid #e8eaed; border-radius: 8px; width: 30px; height: 30px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: #555; }
 .cal-nav:hover { background: #f5f7fa; }
-
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
 .cal-dow { font-size: 11px; color: #999; font-weight: 600; text-align: center; padding: 4px 0; }
-.cal-day {
-  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-  font-size: 13px; border-radius: 8px; cursor: pointer;
-  transition: background 0.1s; color: #1a1a1a; border: 1px solid transparent;
-}
+.cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 13px; border-radius: 8px; cursor: pointer; color: #1a1a1a; border: 1px solid transparent; }
 .cal-day:hover:not(.disabled):not(.empty):not(.past) { background: #fff5f5; border-color: #f5c0c4; }
-.cal-day.today { color: #E8192C; font-weight: 700; }
 .cal-day.selected { background: #E8192C !important; color: white !important; border-color: #E8192C !important; }
 .cal-day.past, .cal-day.disabled { color: #ccc; cursor: default; pointer-events: none; }
 .cal-day.empty { cursor: default; pointer-events: none; }
-
 .slots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-.slot {
-  padding: 9px 4px; border: 1px solid #e8eaed; border-radius: 8px;
-  font-size: 11px; font-weight: 500; text-align: center;
-  cursor: pointer; color: #555; background: white;
-  transition: all 0.12s; line-height: 1.2;
-}
+.slot { padding: 9px 4px; border: 1px solid #e8eaed; border-radius: 8px; font-size: 11px; font-weight: 500; text-align: center; cursor: pointer; color: #555; background: white; line-height: 1.2; }
 .slot:hover { border-color: #E8192C; color: #E8192C; background: #fff5f5; }
 .slot.selected { background: #E8192C; color: white; border-color: #E8192C; }
-
 .form-label { font-size: 12px; color: #555; margin-bottom: 5px; display: block; font-weight: 500; }
-.form-input {
-  width: 100%; padding: 10px 13px;
-  border: 1px solid #e8eaed; border-radius: 8px;
-  font-size: 14px; background: white; color: #1a1a1a;
-  outline: none; font-family: inherit;
-}
+.form-input { width: 100%; padding: 10px 13px; border: 1px solid #e8eaed; border-radius: 8px; font-size: 14px; background: white; color: #1a1a1a; outline: none; font-family: inherit; }
 .form-input:focus { border-color: #E8192C; box-shadow: 0 0 0 3px #fdecea; }
 .error-text { font-size: 12px; color: #E8192C; margin-top: 4px; display: none; }
 .field-gap { margin-top: 12px; }
-
-.summary-bar {
-  background: #fdecea; border: 1px solid #f5c0c4;
-  border-radius: 10px; padding: 11px 14px;
-  font-size: 13px; color: #b5111f;
-  display: none; align-items: center; gap: 8px; margin-bottom: 14px;
-}
-
-.confirm-btn {
-  width: 100%; padding: 13px; background: #E8192C; color: white;
-  border: none; border-radius: 10px; font-size: 15px; font-weight: 600;
-  cursor: pointer; font-family: inherit; transition: background 0.15s;
-}
+.summary-bar { background: #fdecea; border: 1px solid #f5c0c4; border-radius: 10px; padding: 11px 14px; font-size: 13px; color: #b5111f; display: none; align-items: center; gap: 8px; margin-bottom: 14px; }
+.confirm-btn { width: 100%; padding: 13px; background: #E8192C; color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; }
 .confirm-btn:hover { background: #b5111f; }
-
 .success-screen { display: none; padding: 2rem 0; }
-.success-top {
-  text-align: center; background: white; border: 1px solid #e8eaed;
-  border-radius: 14px; padding: 28px 24px 24px; margin-bottom: 14px;
-}
-.success-icon {
-  width: 56px; height: 56px; background: #e6f4ea;
-  border-radius: 50%; display: flex; align-items: center;
-  justify-content: center; margin: 0 auto 14px; font-size: 26px;
-}
+.success-top { text-align: center; background: white; border: 1px solid #e8eaed; border-radius: 14px; padding: 28px 24px 24px; margin-bottom: 14px; }
+.success-icon { width: 56px; height: 56px; background: #e6f4ea; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 26px; }
 .success-heading { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
 .success-sub { font-size: 13px; color: #666; margin-bottom: 16px; }
-.slot-pill {
-  display: inline-block; background: #fdecea; color: #b5111f;
-  border-radius: 20px; padding: 7px 20px;
-  font-size: 13px; font-weight: 600;
-}
-
-.checklist-card {
-  background: white; border: 1px solid #e8eaed;
-  border-radius: 14px; padding: 18px 20px;
-}
-.checklist-title {
-  font-size: 13px; font-weight: 600; color: #444;
-  margin-bottom: 14px; display: flex; align-items: center; gap: 6px;
-}
-.check-item {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 10px 0; border-bottom: 1px solid #f0f0f0;
-}
+.slot-pill { display: inline-block; background: #fdecea; color: #b5111f; border-radius: 20px; padding: 7px 20px; font-size: 13px; font-weight: 600; }
+.checklist-card { background: white; border: 1px solid #e8eaed; border-radius: 14px; padding: 18px 20px; }
+.checklist-title { font-size: 13px; font-weight: 600; color: #444; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+.check-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
 .check-item:last-child { border-bottom: none; padding-bottom: 0; }
-.check-num {
-  width: 22px; height: 22px; background: #fff5f5;
-  border-radius: 50%; display: flex; align-items: center;
-  justify-content: center; font-size: 11px; font-weight: 700;
-  color: #E8192C; flex-shrink: 0; margin-top: 1px;
-}
+.check-num { width: 22px; height: 22px; background: #fff5f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #E8192C; flex-shrink: 0; margin-top: 1px; }
 .check-text { font-size: 13px; color: #333; line-height: 1.5; }
 .check-text strong { color: #1a1a1a; font-weight: 600; }
-.anydesk-btn {
-  display: inline-flex; align-items: center; gap: 5px;
-  margin-top: 6px; padding: 5px 12px;
-  background: #F5A623; color: white;
-  border-radius: 6px; font-size: 12px; font-weight: 600;
-  text-decoration: none; transition: background 0.15s;
-}
+.anydesk-btn { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; padding: 5px 12px; background: #F5A623; color: white; border-radius: 6px; font-size: 12px; font-weight: 600; text-decoration: none; }
 .anydesk-btn:hover { background: #d4881a; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="brand-bar">
-    <div class="brand-logo">V</div>
-    <div>
-      <div class="brand-name">Vyapar</div>
-      <div class="brand-sub">Setup Call Booking</div>
-    </div>
-  </div>
-
+  <div class="brand-bar"><div class="brand-logo">V</div><div><div class="brand-name">Vyapar</div><div class="brand-sub">Setup Call Booking</div></div></div>
   <div id="main-flow">
     <h1>Book your free setup call</h1>
     <p class="subhead">Pick a date and time — our team will walk you through Vyapar in 30 minutes.</p>
-
     <div class="step-label">Step 1 — Pick a date</div>
     <div class="card">
-      <div class="cal-header">
-        <button class="cal-nav" id="prev-month">&#8249;</button>
-        <span class="cal-title" id="cal-title"></span>
-        <button class="cal-nav" id="next-month">&#8250;</button>
-      </div>
+      <div class="cal-header"><button class="cal-nav" id="prev-month">&#8249;</button><span class="cal-title" id="cal-title"></span><button class="cal-nav" id="next-month">&#8250;</button></div>
       <div class="cal-grid" id="cal-grid"></div>
     </div>
-
     <div id="time-section" style="display:none;">
       <div class="step-label">Step 2 — Pick a time</div>
-      <div class="card">
-        <div style="font-size:13px; color:#666; margin-bottom:10px;">
-          Available slots for <strong id="selected-date-label"></strong>
-        </div>
-        <div class="slots-grid" id="slots-grid"></div>
-      </div>
+      <div class="card"><div style="font-size:13px;color:#666;margin-bottom:10px;">Available slots for <strong id="selected-date-label"></strong></div><div class="slots-grid" id="slots-grid"></div></div>
     </div>
-
     <div id="details-section" style="display:none;">
       <div class="step-label">Step 3 — Confirm your number</div>
       <div class="card">
@@ -186,191 +78,82 @@ h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
         <input class="form-input" type="tel" id="inp-phone" placeholder="+91 98765 43210">
         <div class="error-text" id="err-phone">Please enter a valid 10-digit phone number</div>
         <div class="field-gap">
-          <label class="form-label" for="inp-alt-phone">Alternate calling number <span style="color:#999; font-weight:400;">(optional)</span></label>
+          <label class="form-label" for="inp-alt-phone">Alternate calling number <span style="color:#999;font-weight:400;">(optional)</span></label>
           <input class="form-input" type="tel" id="inp-alt-phone" placeholder="+91 98765 43210">
           <div class="error-text" id="err-alt-phone">Please enter a valid 10-digit number</div>
         </div>
       </div>
-
-      <div class="summary-bar" id="summary-bar">
-        📅 <span id="summary-text"></span>
-      </div>
+      <div class="summary-bar" id="summary-bar">📅 <span id="summary-text"></span></div>
       <button class="confirm-btn" id="confirm-btn">Confirm my slot →</button>
     </div>
   </div>
-
   <div class="success-screen" id="success-screen">
-    <div class="success-top">
-      <div class="success-icon">✅</div>
-      <div class="success-heading">You're booked!</div>
-      <div class="success-sub">Your setup call is confirmed for</div>
-      <div class="slot-pill" id="success-slot"></div>
-    </div>
-
+    <div class="success-top"><div class="success-icon">✅</div><div class="success-heading">You're booked!</div><div class="success-sub">Your setup call is confirmed for</div><div class="slot-pill" id="success-slot"></div></div>
     <div class="checklist-card">
       <div class="checklist-title">📋 Before your call — 3 quick things</div>
-
-      <div class="check-item">
-        <div class="check-num">1</div>
-        <div class="check-text">
-          <strong>Be on your laptop or desktop</strong><br>
-          Our team will guide you through Vyapar live — a bigger screen makes it easier.
-        </div>
-      </div>
-
-      <div class="check-item">
-        <div class="check-num">2</div>
-        <div class="check-text">
-          <strong>Install AnyDesk before the call</strong><br>
-          We'll use AnyDesk to screen-share and set things up for you directly.<br>
-          <a class="anydesk-btn" href="https://anydesk.com/en" target="_blank">⬇ Download AnyDesk</a>
-        </div>
-      </div>
-
-      <div class="check-item">
-        <div class="check-num">3</div>
-        <div class="check-text">
-          <strong>Keep your phone handy</strong><br>
-          Our team will call you on your registered phone number a few minutes before the call.
-        </div>
-      </div>
+      <div class="check-item"><div class="check-num">1</div><div class="check-text"><strong>Be on your laptop or desktop</strong><br>Our team will guide you through Vyapar live — a bigger screen makes it easier.</div></div>
+      <div class="check-item"><div class="check-num">2</div><div class="check-text"><strong>Install AnyDesk before the call</strong><br>We'll use AnyDesk to screen-share and set things up for you directly.<br><a class="anydesk-btn" href="https://anydesk.com/en" target="_blank">⬇ Download AnyDesk</a></div></div>
+      <div class="check-item"><div class="check-num">3</div><div class="check-text"><strong>Keep your phone handy</strong><br>Our team will call you on your registered phone number a few minutes before the call.</div></div>
     </div>
   </div>
 </div>
-
 <script>
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhFXE_f37fg9AJUE5kV4XTOOPJeHhptm6zjohgk8uAzWFwqF51kelAu9zfori3ieH-5w/exec";
-
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DAYS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
-
-function generateSlots() {
-  const slots = [];
-  for (let h = 10; h <= 18; h++) {
-    ['00','30'].forEach(m => {
-      const hour12 = h > 12 ? h - 12 : h;
-      const ampm = h >= 12 ? 'PM' : 'AM';
-      slots.push(`${hour12}:${m} ${ampm}`);
-    });
-  }
-  slots.push('7:00 PM');
-  return slots;
-}
-const TIME_SLOTS = generateSlots();
-
-const today = new Date(); today.setHours(0,0,0,0);
-let curYear = today.getFullYear(), curMonth = today.getMonth();
-let selDate = null, selTime = null;
-
-function renderCal() {
-  document.getElementById('cal-title').textContent = MONTHS[curMonth] + ' ' + curYear;
-  const grid = document.getElementById('cal-grid');
-  grid.innerHTML = '';
-  DAYS.forEach(d => {
-    const el = document.createElement('div');
-    el.className = 'cal-dow'; el.textContent = d; grid.appendChild(el);
-  });
-  const startDay = new Date(curYear, curMonth, 1).getDay();
-  const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
-  for (let i = 0; i < startDay; i++) {
-    const el = document.createElement('div'); el.className = 'cal-day empty'; grid.appendChild(el);
-  }
-  for (let d = 1; d <= daysInMonth; d++) {
-    const date = new Date(curYear, curMonth, d);
-    const el = document.createElement('div'); el.textContent = d;
-    const isPast = date <= today, isWeekend = false;
-    const isToday = date.getTime() === today.getTime();
-    const isSel = selDate && date.getTime() === selDate.getTime();
-    if (isPast || isWeekend) { el.className = 'cal-day past'; }
-    else {
-      el.className = 'cal-day' + (isToday ? ' today' : '') + (isSel ? ' selected' : '');
-      el.addEventListener('click', () => selectDate(date));
-    }
+const APPS_SCRIPT_URL="https://script.google.com/macros/s/AKfycbzhFXE_f37fg9AJUE5kV4XTOOPJeHhptm6zjohgk8uAzWFwqF51kelAu9zfori3ieH-5w/exec";
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS=['Su','Mo','Tu','We','Th','Fr','Sa'];
+function generateSlots(){const s=[];for(let h=10;h<=18;h++){['00','30'].forEach(function(m){const h12=h>12?h-12:h;s.push(h12+':'+m+' '+(h>=12?'PM':'AM'));});}s.push('7:00 PM');return s;}
+const TIME_SLOTS=generateSlots();
+const today=new Date();today.setHours(0,0,0,0);
+let curYear=today.getFullYear(),curMonth=today.getMonth(),selDate=null,selTime=null;
+function renderCal(){
+  document.getElementById('cal-title').textContent=MONTHS[curMonth]+' '+curYear;
+  const grid=document.getElementById('cal-grid');grid.innerHTML='';
+  DAYS.forEach(function(d){const el=document.createElement('div');el.className='cal-dow';el.textContent=d;grid.appendChild(el);});
+  const sd=new Date(curYear,curMonth,1).getDay(),dim=new Date(curYear,curMonth+1,0).getDate();
+  for(let i=0;i<sd;i++){const el=document.createElement('div');el.className='cal-day empty';grid.appendChild(el);}
+  for(let d=1;d<=dim;d++){
+    const date=new Date(curYear,curMonth,d),el=document.createElement('div');el.textContent=d;
+    const isSel=selDate&&date.getTime()===selDate.getTime();
+    if(date<=today){el.className='cal-day past';}
+    else{el.className='cal-day'+(isSel?' selected':'');el.addEventListener('click',function(){selectDate(date);});}
     grid.appendChild(el);
   }
 }
-
-function selectDate(date) {
-  selDate = date; selTime = null; renderCal();
-  const label = date.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' });
-  document.getElementById('selected-date-label').textContent = label;
-  document.getElementById('time-section').style.display = 'block';
-  document.getElementById('details-section').style.display = 'none';
-  updateSummary();
-  const sg = document.getElementById('slots-grid'); sg.innerHTML = '';
-  TIME_SLOTS.forEach(t => {
-    const el = document.createElement('div'); el.className = 'slot'; el.textContent = t;
-    el.addEventListener('click', () => selectTime(t, el)); sg.appendChild(el);
-  });
-  document.getElementById('time-section').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+function selectDate(date){
+  selDate=date;selTime=null;renderCal();
+  document.getElementById('selected-date-label').textContent=date.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
+  document.getElementById('time-section').style.display='block';
+  document.getElementById('details-section').style.display='none';updateSummary();
+  const sg=document.getElementById('slots-grid');sg.innerHTML='';
+  TIME_SLOTS.forEach(function(t){const el=document.createElement('div');el.className='slot';el.textContent=t;el.addEventListener('click',function(){selectTime(t,el);});sg.appendChild(el);});
+  document.getElementById('time-section').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-
-function selectTime(time, el) {
-  selTime = time;
-  document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('details-section').style.display = 'block';
-  updateSummary();
-  document.getElementById('details-section').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+function selectTime(time,el){
+  selTime=time;document.querySelectorAll('.slot').forEach(function(s){s.classList.remove('selected');});el.classList.add('selected');
+  document.getElementById('details-section').style.display='block';updateSummary();
+  document.getElementById('details-section').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-
-function updateSummary() {
-  const bar = document.getElementById('summary-bar');
-  if (selDate && selTime) {
-    const ds = selDate.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
-    document.getElementById('summary-text').textContent = ds + ' at ' + selTime + ' · 30-min setup call';
-    bar.style.display = 'flex';
-  } else { bar.style.display = 'none'; }
+function updateSummary(){
+  const bar=document.getElementById('summary-bar');
+  if(selDate&&selTime){document.getElementById('summary-text').textContent=selDate.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'})+' at '+selTime+' · 30-min setup call';bar.style.display='flex';}
+  else{bar.style.display='none';}
 }
-
-document.getElementById('prev-month').addEventListener('click', () => {
-  curMonth--; if (curMonth < 0) { curMonth = 11; curYear--; } renderCal();
+document.getElementById('prev-month').addEventListener('click',function(){curMonth--;if(curMonth<0){curMonth=11;curYear--;}renderCal();});
+document.getElementById('next-month').addEventListener('click',function(){curMonth++;if(curMonth>11){curMonth=0;curYear++;}renderCal();});
+document.getElementById('confirm-btn').addEventListener('click',async function(){
+  const phone=document.getElementById('inp-phone').value.trim();
+  const altPhone=document.getElementById('inp-alt-phone').value.trim();
+  document.getElementById('err-phone').style.display='none';
+  document.getElementById('err-alt-phone').style.display='none';
+  if(!phone||phone.replace(/\D/g,'').length<10){document.getElementById('err-phone').style.display='block';return;}
+  if(altPhone&&altPhone.replace(/\D/g,'').length<10){document.getElementById('err-alt-phone').style.display='block';return;}
+  if(!selDate||!selTime)return;
+  const btn=document.getElementById('confirm-btn');btn.textContent='Confirming…';btn.disabled=true;
+  try{await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone,altPhone:altPhone||'N/A',date:selDate.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),time:selTime,submittedAt:new Date().toLocaleString('en-IN')})});}catch(e){}
+  document.getElementById('success-slot').textContent=selDate.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'  ·  '+selTime;
+  document.getElementById('main-flow').style.display='none';
+  document.getElementById('success-screen').style.display='block';
 });
-document.getElementById('next-month').addEventListener('click', () => {
-  curMonth++; if (curMonth > 11) { curMonth = 0; curYear++; } renderCal();
-});
-
-document.getElementById('confirm-btn').addEventListener('click', async () => {
-  const phone = document.getElementById('inp-phone').value.trim();
-  const altPhone = document.getElementById('inp-alt-phone').value.trim();
-  document.getElementById('err-phone').style.display = 'none';
-  document.getElementById('err-alt-phone').style.display = 'none';
-
-  if (!phone || phone.replace(/\D/g,'').length < 10) {
-    document.getElementById('err-phone').style.display = 'block';
-    return;
-  }
-  if (altPhone && altPhone.replace(/\D/g,'').length < 10) {
-    document.getElementById('err-alt-phone').style.display = 'block';
-    return;
-  }
-  if (!selDate || !selTime) return;
-
-  const btn = document.getElementById('confirm-btn');
-  btn.textContent = 'Confirming…'; btn.disabled = true;
-
-  const payload = {
-    phone: phone,
-    altPhone: altPhone || 'N/A',
-    date: selDate.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
-    time: selTime,
-    submittedAt: new Date().toLocaleString('en-IN')
-  };
-
-  try {
-    await fetch(APPS_SCRIPT_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-  } catch(e) {}
-
-  const dateStr = selDate.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-  document.getElementById('success-slot').textContent = dateStr + '  ·  ' + selTime;
-  document.getElementById('main-flow').style.display = 'none';
-  document.getElementById('success-screen').style.display = 'block';
-});
-
 renderCal();
 </script>
 </body>

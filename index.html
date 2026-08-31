@@ -80,6 +80,7 @@ h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
 }
 .form-input:focus { border-color: #E8192C; box-shadow: 0 0 0 3px #fdecea; }
 .error-text { font-size: 12px; color: #E8192C; margin-top: 4px; display: none; }
+.field-gap { margin-top: 12px; }
 
 .summary-bar {
   background: #fdecea; border: 1px solid #f5c0c4;
@@ -179,12 +180,12 @@ h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
     </div>
 
     <div id="details-section" style="display:none;">
-            <div class="step-label">Step 3 — Confirm your number</div>
+      <div class="step-label">Step 3 — Confirm your number</div>
       <div class="card">
         <label class="form-label" for="inp-phone">Registered phone number <span style="color:#E8192C;">*</span></label>
         <input class="form-input" type="tel" id="inp-phone" placeholder="+91 98765 43210">
         <div class="error-text" id="err-phone">Please enter a valid 10-digit phone number</div>
-        <div style="margin-top:12px;">
+        <div class="field-gap">
           <label class="form-label" for="inp-alt-phone">Alternate calling number <span style="color:#999; font-weight:400;">(optional)</span></label>
           <input class="form-input" type="tel" id="inp-alt-phone" placeholder="+91 98765 43210">
           <div class="error-text" id="err-alt-phone">Please enter a valid 10-digit number</div>
@@ -329,15 +330,12 @@ document.getElementById('next-month').addEventListener('click', () => {
   curMonth++; if (curMonth > 11) { curMonth = 0; curYear++; } renderCal();
 });
 
-document.getElementById('inp-phone').addEventListener('input', () => {
-  document.getElementById('err-phone').style.display = 'none';
-});
-
 document.getElementById('confirm-btn').addEventListener('click', async () => {
-    const phone = document.getElementById('inp-phone').value.trim();
+  const phone = document.getElementById('inp-phone').value.trim();
   const altPhone = document.getElementById('inp-alt-phone').value.trim();
   document.getElementById('err-phone').style.display = 'none';
   document.getElementById('err-alt-phone').style.display = 'none';
+
   if (!phone || phone.replace(/\D/g,'').length < 10) {
     document.getElementById('err-phone').style.display = 'block';
     return;
@@ -351,7 +349,7 @@ document.getElementById('confirm-btn').addEventListener('click', async () => {
   const btn = document.getElementById('confirm-btn');
   btn.textContent = 'Confirming…'; btn.disabled = true;
 
-    const payload = {
+  const payload = {
     phone: phone,
     altPhone: altPhone || 'N/A',
     date: selDate.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
